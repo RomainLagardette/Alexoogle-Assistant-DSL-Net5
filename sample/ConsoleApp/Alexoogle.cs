@@ -12,24 +12,43 @@ namespace ConsoleApp
             var romainComplexe = complexeService.GetRomainComplexe();
             var selectedHousing = romainComplexe.GetHousing("My house");
 
-            Console.WriteLine("Exemple :");
-            Console.WriteLine("switch {on/off} bathroom {hairdryer/mirror} now");
-            Console.WriteLine("is {on/off} bathroom {hairdryer/mirror} ?");
-            Console.WriteLine("---------------------");
+            SystemWriteLine("Exemple :");
+            SystemWriteLine("switch {on/off} bathroom {hairdryer/mirror} now");
+            SystemWriteLine("is {on/off} bathroom {hairdryer/mirror} ?");
+            SystemWriteLine("---------------------");
 
             string command;
             do
             {
                 Console.WriteLine(selectedHousing);
-                Console.WriteLine("---------------------");
-                Console.WriteLine("Yes ?");
-                command = Console.ReadLine();
+                SystemWriteLine("---------------------");
+                AlexoogleWriteLine("Yes ?");
+                command = UserReadLine();
                 var commandResult = complexeService.InterpretComplexeCommand(selectedHousing, command);
-                Console.WriteLine("Ok, " + commandResult);
-                Console.WriteLine("---------------------");
+                AlexoogleWriteLine(commandResult);
+                SystemWriteLine("---------------------");
             } while (!string.IsNullOrWhiteSpace(command));
 
             Console.ReadLine();
+        }
+
+        private void AlexoogleWriteLine(string output)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("Alexoogle: " + output);
+        }
+
+        private void SystemWriteLine(string output)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(output);
+        }
+
+        private string UserReadLine()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write("User: ");
+            return Console.ReadLine();
         }
     }
 }
