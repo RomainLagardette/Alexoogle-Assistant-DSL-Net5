@@ -1,18 +1,26 @@
+﻿using Core.Ports;
 using Domain.Builders;
 using Domain.Entities;
 using Domain.Extensions;
 using Domain.ValueObject;
 using System;
-using Xunit;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Unit.Domain.Tests
+namespace Core.Services
 {
-    public class ManageComplexeTests
+    public class ComplexeService
     {
-        [Fact]
-        public void CreateHousingWithRoomsAndThings()
+        private readonly IInterpretCommand _interpretCommand;
+
+        public ComplexeService(IInterpretCommand interpretCommand)
         {
-            Complexe romainComplexe = new ComplexeBuilder()
+            _interpretCommand = interpretCommand;
+        }
+
+        public Complexe GetRomainComplexe()
+        {
+            Complexe complexe = new ComplexeBuilder()
                 .NewHousing("My house")
                 .AddRoom(
                     new Room().Called("Bathroom")
@@ -30,11 +38,13 @@ namespace Unit.Domain.Tests
                         .Put("fridge".Plug().On())
                         .Put("cooker".Light())
                 );
-
-            Assert.NotEmpty(romainComplexe.Housings);
-            Assert.Equal("My house", romainComplexe.GetHousing("My house").Name);
-            Assert.Equal("Bathroom", romainComplexe.GetHousing("My house").GetRoom("Bathroom").Name);
-            Assert.Equal("hairdryer", romainComplexe.GetHousing("My house").GetRoom("Bathroom").GetThing("hairdryer").Name);
+            return complexe;
         }
+
+        public string InterpretComplexeCommand(Housing housing, string command)
+        {
+            return _interpretCommand.InterpretComplexeCommand(housing, command).Result;
+        }
+
     }
 }

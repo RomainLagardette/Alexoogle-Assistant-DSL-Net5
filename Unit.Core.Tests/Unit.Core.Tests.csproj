@@ -19,8 +19,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\src\DSL.Partiel01.Core\DSL.Partiel01.Core.csproj" />
-  </ItemGroup>
-
 </Project>

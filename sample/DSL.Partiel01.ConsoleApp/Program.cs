@@ -1,19 +1,38 @@
-﻿using System;
-using DSL.Partiel01.Core;
+﻿using Core.Ports;
+using Core.Services;
+using Infrastructure.Adapters;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System;
+using System.Threading.Tasks;
 
 namespace DSL.Partiel01.ConsoleApp
 {
     class Program
     {
-        static void Main(string[] args)
+        static Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            using IHost host = CreateHostBuilder(args).Build();
 
-            var romainComplexe = new ComplexeService().GetRomainComplexe();
+            Run(host.Services);
 
-            Console.WriteLine(romainComplexe);
+            return host.RunAsync();
+        }
 
-            Console.ReadKey();
+        static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureServices((_, services) => services
+                    .AddTransient<IInterpretCommand, IdpInterpretCommand>()
+                    .AddTransient<ComplexeService>());
+
+        static void Run(IServiceProvider services)
+        {
+            using IServiceScope serviceScope = services.CreateScope();
+            IServiceProvider provider = serviceScope.ServiceProvider;
+
+            ComplexeService complexeService = provider.GetRequiredService<ComplexeService>();
+
+            new Alexoogle().Demo(complexeService);
         }
     }
 }
