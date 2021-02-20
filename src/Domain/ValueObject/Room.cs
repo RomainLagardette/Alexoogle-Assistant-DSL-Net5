@@ -34,7 +34,7 @@ namespace Domain.ValueObject
             sb.AppendLine(Name);
             foreach (var thing in _things)
             {
-                sb.AppendLine("-" + thing.ToString());
+                sb.AppendLine("--" + thing.ToString());
             }
             return sb.ToString();
         }

@@ -12,6 +12,7 @@ namespace ConsoleApp
             var romainComplexe = complexeService.GetRomainComplexe();
             var selectedHousing = romainComplexe.GetHousing("My house");
 
+            Console.WriteLine("Exemple :");
             Console.WriteLine("switch {on/off} bathroom {hairdryer/mirror} now");
             Console.WriteLine("is {on/off} bathroom {hairdryer/mirror} ?");
             Console.WriteLine("---------------------");
@@ -21,7 +22,7 @@ namespace ConsoleApp
             {
                 Console.WriteLine(selectedHousing);
                 Console.WriteLine("---------------------");
-                Console.WriteLine("Oui, je vous écoute ?");
+                Console.WriteLine("Yes ?");
                 command = Console.ReadLine();
                 var commandResult = complexeService.InterpretComplexeCommand(selectedHousing, command);
                 Console.WriteLine("Ok, " + commandResult);

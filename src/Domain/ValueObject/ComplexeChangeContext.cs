@@ -44,15 +44,15 @@ namespace Domain.ValueObject
                 case CommandType.Is:
                     return Is(thing);
                 default:
-                    return "Je ne vous ai pas compris...";
+                    return "I didn't understand you...";
             }
         }
 
         private string Is(Thing thing)
         {
             if (SubCommandType.On == subType)
-                return thing.IsOn ? $"{thing.Name} est bien allumé" : $"{thing.Name} n'est pas allumé";
-            return !thing.IsOn ? $"{thing.Name} est bien éteinte" : $"{thing.Name} n'est pas éteinte";
+                return thing.IsOn ? $"{thing.Name} is on" : $"{thing.Name} is not on";
+            return !thing.IsOn ? $"{thing.Name} is off" : $"{thing.Name} is not off";
         }
 
         private string Switch(Thing thing)
@@ -62,16 +62,16 @@ namespace Domain.ValueObject
                 if (!thing.IsOn)
                 {
                     thing.SwitchOn();
-                    return $"J'allume {thing.Name}";
+                    return $"I switch on {thing.Name}";
                 }
-                return $"{thing.Name} est déjà allumé";
+                return $"{thing.Name} is already on";
             }
             if (thing.IsOn)
             {
                 thing.SwitchOff();
-                return $"J'éteins {thing.Name}";
+                return $"I switch off {thing.Name}";
             }
-            return $"{thing.Name} est déjà éteinte";
+            return $"{thing.Name} is already off";
         }
     }
 }
