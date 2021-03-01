@@ -1,18 +1,18 @@
-﻿using Domain.ValueObject;
+﻿using Domain.Entities;
 using Infrastructure.IdpInterpretCommand;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Infrastructure.Adapters
+namespace Application.InterpretCommand
 {
     public class IdpInterpretCommand
     {
-        public InterpretCommandResult InterpretComplexeCommand(Housing housing, string command)
+        public string InterpretComplexeCommand(Housing housing, string command)
         {
             var parser = new Parser();
             parser.Parse(command);
-            return new InterpretCommandResult(parser.Evaluate(housing));
+            return parser.Evaluate(housing);
         }
     }
 }

@@ -7,8 +7,10 @@ namespace ConsoleApp
 {
     class Alexoogle
     {
-        public void Demo(ComplexeService complexeService)
+        public void Demo()
         {
+            var complexeService = new ComplexeService();
+
             var romainComplexe = complexeService.GetRomainComplexe();
             var selectedHousing = romainComplexe.GetHousing("My house");
 

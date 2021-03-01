@@ -1,7 +1,6 @@
 using Domain.Builders;
 using Domain.Entities;
 using Domain.Extensions;
-using Domain.ValueObject;
 using System;
 using Xunit;
 

@@ -1,8 +1,7 @@
-﻿using Application.Ports;
+﻿using Application.InterpretCommand;
 using Domain.Builders;
 using Domain.Entities;
 using Domain.Extensions;
-using Domain.ValueObject;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,11 +10,11 @@ namespace Application.Services
 {
     public class ComplexeService
     {
-        private readonly IInterpretCommand _interpretCommand;
+        private readonly IdpInterpretCommand _interpretCommand;
 
-        public ComplexeService(IInterpretCommand interpretCommand)
+        public ComplexeService()
         {
-            _interpretCommand = interpretCommand;
+            _interpretCommand = new IdpInterpretCommand();
         }
 
         public Complexe GetRomainComplexe()
@@ -43,7 +42,7 @@ namespace Application.Services
 
         public string InterpretComplexeCommand(Housing housing, string command)
         {
-            return _interpretCommand.InterpretComplexeCommand(housing, command).Message;
+            return _interpretCommand.InterpretComplexeCommand(housing, command);
         }
 
     }

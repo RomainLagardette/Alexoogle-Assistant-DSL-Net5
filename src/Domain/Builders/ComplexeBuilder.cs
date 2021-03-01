@@ -1,6 +1,5 @@
 ﻿using Domain.Entities;
 using Domain.Exceptions;
-using Domain.ValueObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,6 @@ using System.Text;
 
 namespace Domain.Builders
 {
-    // TODO to intrafra, ComplexeCatalog,  ??? 
     public class ComplexeBuilder
     {
         private readonly List<Housing> _housings = new List<Housing>();
